@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->incorrectAns->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -59,27 +60,33 @@ void MainWindow::generateRandomNum()
 
 void MainWindow::on_start_clicked()
 {
-
     generateRandomNum();
+    ui->incorrectAns->setVisible(false);
 
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
+
+        //ui->incorrectAns->setVisible(false);
         QString userAnswerStr = ui->userAnswer->text();
         int userAnswer = userAnswerStr.toInt();
+        QString message = QString::number(resultOperation);
         if(userAnswer == resultOperation)
         {
             ui->CorrectResult->setText("Yes, you are correct!") ;
+            ui->incorrectAns->setVisible(false);
         }
         else
         {
-            QString message = "The correct value is: " + QString::number(resultOperation);
-           QMessageBox::information(this, "Incorrect",message );
+            ui->CorrectResult->setText("Incorrect! Correct is: ") ;
+            ui->incorrectAns->setVisible(true);
+            ui->incorrectAns->setText(message);
         }
         // re generate new numbers when user has submitted
-
+        ui->userAnswer->setText("");
         generateRandomNum();
+
 }
 

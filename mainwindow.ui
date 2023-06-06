@@ -98,6 +98,9 @@
       <height>32</height>
      </rect>
     </property>
+    <property name="dragEnabled">
+     <bool>false</bool>
+    </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
@@ -167,6 +170,28 @@
      <string>Click here to start</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="incorrectAns">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>480</y>
+      <width>113</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
    <zorder>pushButton</zorder>
    <zorder>userAnswer</zorder>
    <zorder>label</zorder>
@@ -179,6 +204,7 @@
    <zorder>numBox1</zorder>
    <zorder>label_5</zorder>
    <zorder>start</zorder>
+   <zorder>incorrectAns</zorder>
   </widget>
  </widget>
  <resources/>
