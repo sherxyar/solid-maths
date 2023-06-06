@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QRandomGenerator>
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,8 +16,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_start_clicked()
+void MainWindow::generateRandomNum()
 {
     // generate random numbers
     int randomNumber1 = QRandomGenerator::global()->bounded(100); // Generate a random number between 0 and 99
@@ -53,27 +53,33 @@ void MainWindow::on_start_clicked()
         resultOperation = randomNumber1 / randomNumber2;
         break;
     }
-    // Enter this part in the approtiate slot
-    // get user input answer
 
 }
 
 
+void MainWindow::on_start_clicked()
+{
 
+    generateRandomNum();
+
+}
 
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString userAnswerStr = ui->userAnswer->text();
-    int userAnswer = userAnswerStr.toInt();
-    if(userAnswer == resultOperation)
-    {
-        qDebug() << "Yes, you are correct!";
-    }
-    else
-    {
-        qDebug() << "You are incorrect!";
+        QString userAnswerStr = ui->userAnswer->text();
+        int userAnswer = userAnswerStr.toInt();
+        if(userAnswer == resultOperation)
+        {
+            ui->CorrectResult->setText("Yes, you are correct!") ;
+        }
+        else
+        {
+            QString message = "The correct value is: " + QString::number(resultOperation);
+           QMessageBox::information(this, "Incorrect",message );
+        }
+        // re generate new numbers when user has submitted
 
-    }
+        generateRandomNum();
 }
 

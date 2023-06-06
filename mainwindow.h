@@ -19,7 +19,7 @@ public:
 private slots:
     void on_start_clicked();
     void on_pushButton_clicked();
-
+    void generateRandomNum();
 private:
     Ui::MainWindow *ui;
     int resultOperation;
