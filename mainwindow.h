@@ -16,12 +16,12 @@ public:
     ~MainWindow();
 
 
-
 private slots:
-
     void on_start_clicked();
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    int resultOperation;
 };
 #endif // MAINWINDOW_H

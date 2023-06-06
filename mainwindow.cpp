@@ -3,7 +3,6 @@
 #include <QRandomGenerator>
 
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -40,31 +39,41 @@ void MainWindow::on_start_clicked()
     QString randomOption = operations[randomIndex];
     ui->operation->setText(randomOption);
 
-    int resultofOperation;
     switch(randomIndex) {
     case 0: // Addition
-        resultofOperation = randomNumber1 + randomNumber2;
+        resultOperation = randomNumber1 + randomNumber2;
         break;
     case 1: // Subtraction
-        resultofOperation = randomNumber1 - randomNumber2;
+        resultOperation = randomNumber1 - randomNumber2;
         break;
     case 2: // Multiplication
-        resultofOperation = randomNumber1 * randomNumber2;
+        resultOperation = randomNumber1 * randomNumber2;
         break;
     case 3: // Division
-        resultofOperation = randomNumber1 / randomNumber2;
+        resultOperation = randomNumber1 / randomNumber2;
         break;
     }
-
+    // Enter this part in the approtiate slot
+    // get user input answer
 
 }
 
 
-// Enter this part in the approtiate slot
-// get user input answer
-QString userAnswerStr = ui->userAnswer->text();
-int userAnswer = userAnswerStr.toInt();
-if(userAnswer != resultofOperation)
+
+
+
+void MainWindow::on_pushButton_clicked()
 {
-    qDebug() << "Incorrect!";
+    QString userAnswerStr = ui->userAnswer->text();
+    int userAnswer = userAnswerStr.toInt();
+    if(userAnswer == resultOperation)
+    {
+        qDebug() << "Yes, you are correct!";
+    }
+    else
+    {
+        qDebug() << "You are incorrect!";
+
+    }
 }
+
