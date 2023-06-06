@@ -36,7 +36,35 @@ void MainWindow::on_start_clicked()
     // randomly choose one operation
     int randomIndex = QRandomGenerator::global()->bounded(operations.size());
 
+    // assigns the random operation to the Qline box
     QString randomOption = operations[randomIndex];
     ui->operation->setText(randomOption);
+
+    int resultofOperation;
+    switch(randomIndex) {
+    case 0: // Addition
+        resultofOperation = randomNumber1 + randomNumber2;
+        break;
+    case 1: // Subtraction
+        resultofOperation = randomNumber1 - randomNumber2;
+        break;
+    case 2: // Multiplication
+        resultofOperation = randomNumber1 * randomNumber2;
+        break;
+    case 3: // Division
+        resultofOperation = randomNumber1 / randomNumber2;
+        break;
+    }
+
+
 }
 
+
+// Enter this part in the approtiate slot
+// get user input answer
+QString userAnswerStr = ui->userAnswer->text();
+int userAnswer = userAnswerStr.toInt();
+if(userAnswer != resultofOperation)
+{
+    qDebug() << "Incorrect!";
+}
