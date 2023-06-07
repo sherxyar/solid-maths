@@ -2,19 +2,44 @@
 #include "ui_mainwindow.h"
 #include <QRandomGenerator>
 #include <QMessageBox>
-
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->incorrectAns->setVisible(false);
+
+      // Create the overlay widget
+       overlayWidget = new QWidget(this);
+       overlayWidget->setGeometry(rect());
+       overlayWidget->setStyleSheet("background-color: rgba(1, 0, 0, 1);");
+       overlayWidget->setVisible(false);
+       toggleOverlay(true);
+
+       // Create the layout for the overlay widget
+           QVBoxLayout* overlayLayout = new QVBoxLayout(overlayWidget);
+           overlayLayout->setAlignment(Qt::AlignCenter);
+
+           // Add the "Start" button to the overlay layout
+           QPushButton* startButton = new QPushButton("Click to Start", overlayWidget);
+           startButton->setStyleSheet("background-color: #007bff; color: white; padding: 10px 20px; font-size: 18px; border: none;");
+           overlayLayout->addWidget(startButton);
+
+           // Connect the Start button to the toggleOverlay slot
+           QObject::connect(startButton, &QPushButton::clicked, [&]() {
+               // Perform your desired actions here
+               generateRandomNum();
+               ui->incorrectAns->setVisible(false);
+               toggleOverlay(false);
+           });
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete overlayWidget;
 }
 
 void MainWindow::generateRandomNum()
@@ -58,12 +83,6 @@ void MainWindow::generateRandomNum()
 }
 
 
-void MainWindow::on_start_clicked()
-{
-    generateRandomNum();
-    ui->incorrectAns->setVisible(false);
-
-}
 
 
 void MainWindow::on_pushButton_clicked()
@@ -90,3 +109,12 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+void MainWindow::toggleOverlay(bool visible)
+{
+    // Toggle the visibility of the elements and the overlay
+        visible = !overlayWidget->isVisible();
+
+
+        overlayWidget->setVisible(visible);
+        overlayWidget->raise();
+}

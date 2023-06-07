@@ -17,11 +17,15 @@ public:
 
 
 private slots:
-    void on_start_clicked();
+
     void on_pushButton_clicked();
     void generateRandomNum();
+    void toggleOverlay(bool visible);
+
+
 private:
     Ui::MainWindow *ui;
     int resultOperation;
+    QWidget* overlayWidget;
 };
 #endif // MAINWINDOW_H
