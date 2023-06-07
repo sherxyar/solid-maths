@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+      ui->setupUi(this);
+      setWindowTitle("Simple Maths");
 
       // Create the overlay widget
        overlayWidget = new QWidget(this);
@@ -83,8 +84,6 @@ void MainWindow::generateRandomNum()
 }
 
 
-
-
 void MainWindow::on_pushButton_clicked()
 {
 
@@ -113,8 +112,6 @@ void MainWindow::toggleOverlay(bool visible)
 {
     // Toggle the visibility of the elements and the overlay
         visible = !overlayWidget->isVisible();
-
-
         overlayWidget->setVisible(visible);
         overlayWidget->raise();
 }
